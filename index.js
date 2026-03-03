@@ -1,10 +1,17 @@
-const express = require("express");
-const app = express();
+const express = require('express');
+const path = require('path');
 
-app.get("/", (req, res) => {
-  res.send("Node CI/CD is working 🚀 Syaiful ganteng banget wowok yuyun");
+const app = express();
+const PORT = process.env.PORT || 5028;
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve the main HTML file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(5028, () => {
-  console.log("Server running on port 5028 Syaiful");
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
